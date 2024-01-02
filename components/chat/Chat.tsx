@@ -1,23 +1,17 @@
 "use client";
 import { FaRobot } from "react-icons/fa";
 import { useChat } from "ai/react";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTrigger,
-} from "../ui/dialog";
-
+import { IoSend } from "react-icons/io5";
 import { useSession } from "next-auth/react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 const Chat = () => {
   const session = useSession();
+  const [isOpen, setIsOpen] = useState(false);
 
   const chatContainerRef = useRef<HTMLUListElement>(null);
 
@@ -32,65 +26,72 @@ const Chat = () => {
   }, [messages]);
 
   return (
-    <Dialog modal={false}>
-      <DialogTrigger asChild className=" right-8 bottom-8 fixed">
+    <Popover open={isOpen} onOpenChange={setIsOpen}>
+      <PopoverTrigger asChild className="fixed bottom-8 right-8">
         <Button className="h-25 w-25">
           <FaRobot size={24} />
         </Button>
-      </DialogTrigger>
-      <DialogContent className="">
-        <DialogHeader className="font-bold">
-          <span className="flex items-center gap-2">
-            <FaRobot></FaRobot> Note Assistant
-          </span>
-        </DialogHeader>
+      </PopoverTrigger>
+      <PopoverContent className="h-[500px] mx-2 flex flex-col w-screen md:w-[300px] -mb-14 md:mb-0 ">
+        <h2 className="pb-4 font-bold flex items-center gap-2">
+          <FaRobot />
+          Note Assistant
+          <IoIosCloseCircleOutline
+            className="ml-auto cursor-pointer"
+            size={20}
+            onClick={() => setIsOpen(false)}
+          />
+        </h2>
+
         <ul
+          className="flex flex-col gap-2 overflow-y-auto mb-4 text-sm"
           ref={chatContainerRef}
-          className="flex flex-col gap-2 overflow-y-auto h-[250px] "
         >
           {messages.map((message, index) => {
             return (
               <li
                 key={index}
-                className={`border rounded-md p-2 w-[80%] ${
-                  message.role === "user" ? "ml-auto bg-primary text-white" : ""
+                className={`border p-2 w-full rounded-lg ${
+                  message.role === "user" ? "bg-primary text-white" : ""
                 }`}
               >
-                <p className="flex flex-col break-words whitespace-pre-wrap">
-                  <span className="font-bold px-2 pt-2 ">
-                    {message.role === "user" ? (
-                      "You"
-                    ) : (
-                      <span className="flex items-center gap-2 ">
-                        <FaRobot></FaRobot>
-                        <span className="text-sm ">Note Assistant</span>
-                      </span>
-                    )}
-                  </span>
-                  <span className="p-4">{message.content}</span>
+                <p className="flex items-center gap-2 py-1">
+                  {message.role === "user" ? (
+                    ""
+                  ) : (
+                    <>
+                      <FaRobot />
+                      Assistant
+                    </>
+                  )}
+                </p>
+                <p className="break-words whitespace-pre-wrap px-2 pb-2">
+                  {message.content}
                 </p>
               </li>
             );
           })}
+          <div className="mt-auto">
+            <p className="italic text-center">
+              {isLoading && "Assistant is thinking..."}
+              {messages.length === 0 && "Ask me about your notes!"}
+              {error && error.message}
+            </p>
+          </div>
         </ul>
 
-        <div>
-          {isLoading && "AI is thinking..."}
-          {error && error.message}
-        </div>
-
-        <DialogFooter>
-          <form onSubmit={handleSubmit} className="flex gap-2 w-full">
-            <Input
-              value={input}
-              onChange={handleInputChange}
-              placeholder="Say something..."
-            />
-            <Button type="submit">Send</Button>
-          </form>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        <form onSubmit={handleSubmit} className="flex gap-2 w-full mt-auto">
+          <Input
+            value={input}
+            onChange={handleInputChange}
+            placeholder="Say something..."
+          />
+          <Button type="submit">
+            <IoSend />
+          </Button>
+        </form>
+      </PopoverContent>
+    </Popover>
   );
 };
 

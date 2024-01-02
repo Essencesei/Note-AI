@@ -3,6 +3,7 @@ import React, { useTransition } from "react";
 import { Button } from "../ui/button";
 import { DELETE_NOTE } from "@/lib/server_actions/action";
 import { Loader2 } from "lucide-react";
+import { MdDelete } from "react-icons/md";
 import {
   Dialog,
   DialogClose,
@@ -29,7 +30,7 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
             startTransition(async () => {});
           }}
         >
-          Delete
+          <MdDelete />
         </Button>
       </DialogTrigger>
       <DialogContent>

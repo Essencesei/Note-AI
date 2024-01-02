@@ -2,19 +2,15 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { signOut } from "next-auth/react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTrigger,
-} from "../ui/dialog";
-import AddNote from "../AddNote/AddNote";
+import { FiLogOut } from "react-icons/fi";
+import { Loader2 } from "lucide-react";
 
 const NavMenu = () => {
   const [isLoading, setIsLoading] = useState(false);
   return (
     <div className="flex gap-2">
       <Button
+        className="w-16"
         disabled={isLoading}
         variant={"destructive"}
         onClick={() => {
@@ -22,7 +18,7 @@ const NavMenu = () => {
           signOut({ callbackUrl: "/login" });
         }}
       >
-        Logout
+        {isLoading ? <Loader2 className="animate-spin" /> : <FiLogOut />}
       </Button>
     </div>
   );

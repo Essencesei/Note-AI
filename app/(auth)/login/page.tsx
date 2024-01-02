@@ -13,9 +13,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { Separator } from "@/components/ui/separator";
 import { Loader2 } from "lucide-react";
+import { redirect } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -25,6 +26,8 @@ const formSchema = z.object({
 
 const LoginPage = () => {
   const [isloading, setIsLoading] = useState(false);
+  const session = useSession();
+  if (session.data) redirect("/notes");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

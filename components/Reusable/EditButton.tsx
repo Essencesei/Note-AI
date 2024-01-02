@@ -16,6 +16,7 @@ import { Form, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { UPDATE_NOTE } from "@/lib/server_actions/action";
+import { MdModeEdit } from "react-icons/md";
 
 const formSchema = z.object({
   title: z
@@ -60,7 +61,9 @@ const EditButton = ({ props }: EditButtonProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button>Edit</Button>
+        <Button>
+          <MdModeEdit />
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
