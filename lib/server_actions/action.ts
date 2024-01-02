@@ -62,6 +62,7 @@ export const UPDATE_NOTE = async (values: {
   id: string;
   title: string;
   content: string;
+  authorId: string;
 }) => {
   const embedding = await getEmbeddingForNotes(values.title, values.content);
   await prisma.$transaction(async (tx) => {
@@ -72,6 +73,7 @@ export const UPDATE_NOTE = async (values: {
       data: {
         title: values.title,
         content: values.content,
+        
       },
     });
 
@@ -79,6 +81,7 @@ export const UPDATE_NOTE = async (values: {
       {
         id: values.id,
         values: embedding,
+        metadata:{authorId: values.authorId}
       },
     ]);
   });

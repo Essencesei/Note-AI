@@ -53,6 +53,7 @@ const EditButton = ({ props }: EditButtonProps) => {
       id: props.id,
       title: values.title,
       content: values.content,
+      authorId: props.authorId
     };
     await UPDATE_NOTE(newValues);
     setIsOpen(false);
