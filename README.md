@@ -1,3 +1,39 @@
+# Note-AI
+
+## Overview
+
+Note-AI is a cutting-edge note-taking application that comes equipped with an AI assistant to revolutionize the way you manage and interact with your notes.
+
+## Features
+
+- **AI Assistant Interaction**: Seamlessly ask your AI assistant for information related to your notes.
+- **Note Management**: Create, edit, and delete notes effortlessly.
+- **Google Authentication**: Securely log in using Google authentication.
+
+## Technologies Used
+
+- **Next.js**: Powering the frontend for a smooth and responsive user experience.
+- **Prisma**: Facilitating efficient database management and queries.
+- **Pinecone**: Utilizing vector operations for advanced data manipulation.
+- **OpenAI API**: Leveraging powerful AI capabilities for intelligent interactions.
+
+## Getting Started
+
+### Installation
+
+1. Clone the repository.
+2. Install dependencies using `npm install`.
+3. Set up Google authentication credentials.
+4. Configure Prisma for your database.
+5. Ensure Pinecone integration and API keys are set correctly.
+6. Run the application using `npm run dev`.
+
+## Usage
+
+1. Register or log in using Google authentication.
+2. Create, edit, or delete notes as needed.
+3. Interact with the AI assistant to access information about your notes.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
