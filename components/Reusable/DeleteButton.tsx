@@ -1,5 +1,5 @@
 "use client";
-import React, { useTransition } from "react";
+import React, { useState, useTransition } from "react";
 import { Button } from "../ui/button";
 import { DELETE_NOTE } from "@/lib/server_actions/action";
 import { Loader2 } from "lucide-react";
@@ -19,9 +19,10 @@ type DeleteButtonProps = {
 };
 
 const DeleteButton = ({ id }: DeleteButtonProps) => {
+  const [isOpen, setIsOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
           variant={"destructive"}
@@ -43,22 +44,23 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
           Warning: This action cannot be undone.
         </p>
 
-        <DialogFooter>
-          <DialogClose className="flex gap-2">
-            <Button
-              variant={"destructive"}
-              disabled={isPending}
-              onClick={() => {
-                startTransition(async () => {
-                  await DELETE_NOTE(id);
-                });
-              }}
-            >
-              Delete{" "}
-              {isPending && <Loader2 size={16} className="animate-spin" />}
-            </Button>
-            <Button>Cancel</Button>
-          </DialogClose>
+        <DialogFooter className="flex gap-2 ">
+          <Button
+            className="w-full order-1 md:order-none"
+            variant={"destructive"}
+            disabled={isPending}
+            onClick={() => {
+              startTransition(async () => {
+                await DELETE_NOTE(id);
+                setIsOpen(false);
+              });
+            }}
+          >
+            Delete {isPending && <Loader2 size={16} className="animate-spin" />}
+          </Button>
+          <Button className="w-full" onClick={() => setIsOpen(false)}>
+            Cancel
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

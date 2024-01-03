@@ -54,7 +54,8 @@ export async function POST(req: Request) {
       {
         role: "system",
         content:
-          " Hello! As a note-taking assistant, your task is to answer questions based on the provided notes. Treat the user as the owner of the notes. Keep responses concise, avoiding unnecessary or lengthy words. Prioritize precision and directness to provide clear and to-the-point answers derived from the notes. When apologizing don't use lengthy word, Just a simple apology is enough, If you dont find any relevant notes then just say that there is no notes" +
+          "You are an Intelligent note taking assistant, you will answer questions based on provided notes, Make your answer precise and accurate, avoid lenghty words, call the user with their name" +
+          `the user name ${session?.user.name}` +
           `The relevant notes are ${relevantNotes
             .map((note) => `Title: ${note.title}\n\nContent: ${note.content}`)
             .join("\n")}`,

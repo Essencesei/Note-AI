@@ -53,7 +53,7 @@ const EditButton = ({ props }: EditButtonProps) => {
       id: props.id,
       title: values.title,
       content: values.content,
-      authorId: props.authorId
+      authorId: props.authorId,
     };
     await UPDATE_NOTE(newValues);
     setIsOpen(false);
@@ -111,9 +111,15 @@ const EditButton = ({ props }: EditButtonProps) => {
                 </FormItem>
               )}
             />
-            <DialogFooter>
-              <Button type="submit">Edit</Button>
-              <Button type="button" onClick={() => setIsOpen(false)}>
+            <DialogFooter className="flex gap-2">
+              <Button type="submit" className="w-full">
+                Edit
+              </Button>
+              <Button
+                type="button"
+                className="w-full"
+                onClick={() => setIsOpen(false)}
+              >
                 Cancel
               </Button>
             </DialogFooter>
