@@ -2,8 +2,7 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { signOut } from "next-auth/react";
-import { FiLogOut } from "react-icons/fi";
-import { Loader2 } from "lucide-react";
+import { Loader2, LogOut } from "lucide-react";
 
 const NavMenu = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +17,7 @@ const NavMenu = () => {
           signOut({ callbackUrl: "/login" });
         }}
       >
-        {isLoading ? <Loader2 className="animate-spin" /> : <FiLogOut />}
+        {isLoading ? <Loader2 className="animate-spin" /> : <LogOut />}
       </Button>
     </div>
   );

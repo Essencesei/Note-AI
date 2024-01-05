@@ -16,7 +16,7 @@ import { Form, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { UPDATE_NOTE } from "@/lib/server_actions/action";
-import { MdModeEdit } from "react-icons/md";
+import { Pencil } from "lucide-react";
 
 const formSchema = z.object({
   title: z
@@ -63,7 +63,7 @@ const EditButton = ({ props }: EditButtonProps) => {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button>
-          <MdModeEdit />
+          <Pencil />
         </Button>
       </DialogTrigger>
       <DialogContent>

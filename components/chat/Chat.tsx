@@ -1,13 +1,12 @@
 "use client";
-import { FaRobot } from "react-icons/fa";
 import { useChat } from "ai/react";
 import React, { useEffect, useRef, useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { IoSend } from "react-icons/io5";
 import { useSession } from "next-auth/react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { Bot, SendHorizontal, XCircle } from "lucide-react";
 
 const Chat = () => {
   const session = useSession();
@@ -29,16 +28,15 @@ const Chat = () => {
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild className="fixed bottom-8 right-8">
         <Button className="h-25 w-25">
-          <FaRobot size={24} />
+          <Bot />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="h-[500px] mx-2 flex flex-col w-screen md:w-[300px] -mb-14 md:mb-0 ">
         <h2 className="pb-4 font-bold flex items-center gap-2">
-          <FaRobot />
+          <Bot />
           Note Assistant
-          <IoIosCloseCircleOutline
+          <XCircle
             className="ml-auto cursor-pointer"
-            size={20}
             onClick={() => setIsOpen(false)}
           />
         </h2>
@@ -60,7 +58,7 @@ const Chat = () => {
                     ""
                   ) : (
                     <>
-                      <FaRobot />
+                      <Bot />
                       Assistant
                     </>
                   )}
@@ -87,7 +85,7 @@ const Chat = () => {
             placeholder="Say something..."
           />
           <Button type="submit">
-            <IoSend />
+            <SendHorizontal />
           </Button>
         </form>
       </PopoverContent>

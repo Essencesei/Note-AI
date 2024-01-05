@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/db/authOptions";
 import { redirect } from "next/navigation";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,9 +26,16 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <SessionProvider>
-          {session && <Navbar />}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {session && <Navbar />}
 
-          {children}
+            {children}
+          </ThemeProvider>
         </SessionProvider>
       </body>
     </html>

@@ -16,7 +16,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
-import { Loader2 } from "lucide-react";
+import { FilePlus, Loader2 } from "lucide-react";
 
 import { useSession } from "next-auth/react";
 import { CREATE_NOTE } from "@/lib/server_actions/action";
@@ -60,7 +60,9 @@ const AddNote = () => {
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
-          <Button>Add Note</Button>
+          <Button>
+            <FilePlus />
+          </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
