@@ -47,12 +47,7 @@ const Chat = () => {
         >
           {messages.map((message, index) => {
             return (
-              <li
-                key={index}
-                className={`border p-2 w-full rounded-lg ${
-                  message.role === "user" ? "bg-primary text-white" : ""
-                }`}
-              >
+              <li key={index} className={`border p-2 w-full rounded-lg `}>
                 <p className="flex items-center gap-2 py-1">
                   {message.role === "user" ? (
                     ""
