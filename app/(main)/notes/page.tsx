@@ -20,7 +20,7 @@ import React from "react";
 
 const Notes = async () => {
   const session = await getServerSession(authOptions);
-  if (!session) redirect("/login");
+  if (!session) throw Error("No session found");
 
   const notes = await GET_NOTES(session.user.id);
 

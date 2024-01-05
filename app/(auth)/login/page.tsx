@@ -26,8 +26,8 @@ const formSchema = z.object({
 
 const LoginPage = () => {
   const [isloading, setIsLoading] = useState(false);
-  const session = useSession();
-  if (session.data) redirect("/notes");
+  // const session = useSession();
+  // if (session.data) redirect("/notes");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

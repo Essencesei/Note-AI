@@ -1,16 +1,21 @@
+import { authOptions } from "@/lib/db/authOptions";
 import { Metadata } from "next";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Login | Note AI",
   description: "Login to Note AI",
 };
 
-export default function AuthLayout({
+export default async function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession(authOptions);
+  if (session) redirect("/notes");
   return (
     <>
       <main className="flex h-screen">

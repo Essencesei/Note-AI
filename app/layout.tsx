@@ -5,6 +5,7 @@ import { SessionProvider } from "@/providers/SessionProvider";
 import Navbar from "@/components/Navbar/Navbar";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/db/authOptions";
+import { redirect } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
